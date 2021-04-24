@@ -1,0 +1,17 @@
+.todo-item{
+    font-size: 16px;
+    align-items: center;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f2f3f5;
+}
+.todo-item:hover .check-box{
+    opacity: 0.5;
+    background: #eee;
+}
+
+.check-box{
+    border: 1px solid #eee;
+    border-radius: 8px;
+    font-size: 22px;
+    opacity: 0;
+}

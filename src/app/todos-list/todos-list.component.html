@@ -1,0 +1,26 @@
+<div class="container mt-5">
+    <div class="btn-group btn-group-toggle">
+        <button (click)="changeMode()" class="btn btn-info {{ historicMode ? '' : 'active' }}">All Tasks</button>
+        <button (click)="changeMode()" class="btn btn-info {{ historicMode ? 'active' : '' }}">Historic</button>
+    </div>
+    
+    <div class="todo-list">
+        <div class="todo-item d-flex justify-content-between py-4" *ngFor="let item of list">
+            <div class="todo-text mt-1 ml-3">
+                {{ item.text }}
+            </div>
+            <div class="btn-group btn-group-toggle" data-toggle="buttons"  >
+                <label class="btn btn-sm {{ item.statusId === 1 ? 'btn-primary active' : 'btn-light' }}">
+                    <input type="radio" name="options" id="option1" [value]="1" [(ngModel)]="item.statusId" (click)="updateToDo(item)"> Pendiente
+                </label>
+                <label class="btn btn-sm {{ item.statusId === 2 ? 'active btn-primary' : 'btn-light' }}">
+                    <input type="radio" name="options" id="option2" [value]="2" [(ngModel)]="item.statusId" (click)="updateToDo(item)"> En Proceso
+                </label>
+                <label class="btn btn-sm {{ item.statusId === 3 ? 'active btn-primary' : 'btn-light' }}">
+                    <input type="radio" name="options" id="option3" [value]="3" [(ngModel)]="item.statusId" (click)="updateToDo(item)"> Resuelto
+                </label>
+            </div>
+            <button class="btn btn-sm btn-danger" (click)="deleteToDo(item.id)"><mat-icon>delete</mat-icon></button>
+        </div>
+    </div>
+</div>

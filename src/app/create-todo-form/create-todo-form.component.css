@@ -1,0 +1,18 @@
+
+.todo-box{
+    padding: 25px;
+    background-color: white;
+    border-radius: 4px;
+    margin-top: -50px;
+    box-shadow: 0px 4px 12px grey;
+}
+.add-button{
+    background: #00cca3;
+    font-weight: 500;
+}
+
+.add-button:hover{
+    box-shadow: 0px 0px 0px 2px grey;
+    background-color: #00997a;
+    color: white;
+}

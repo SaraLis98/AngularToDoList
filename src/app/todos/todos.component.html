@@ -3,33 +3,11 @@
 </section>
 
 <div class="container">
-    <form class="input-group mb-3 todo-box">
-        <input class="form-control me-2 pr-5" type="search" placeholder="Type task here ..." aria-label="Search">
-        <button class=" btn add-button mx-4" type="submit">
-           Add Task
-        </button>
-    </form>
+    <app-create-todo-form></app-create-todo-form>
 </div>
 
 <section class="section">
-    <div class="container mt-5">
-        <div class="todo-list">
-            <div class="todo-item d-flex py-4">
-                <mat-icon class="check-box">check</mat-icon>
-                <div class="todo-text mt-1 ml-3">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                </div>
-            </div>
-
-            <div class="todo-item d-flex p-4 ">
-                <mat-icon class="check-box">check</mat-icon>
-                
-                <div class="todo-text mt-1 ml-3">
-                    This only has one line on it
-                </div>
-            </div>
-        </div>
-    </div>
+    <app-todos-list></app-todos-list>
 </section>
 
 
