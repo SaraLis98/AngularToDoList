@@ -11,12 +11,16 @@ import { TodosComponent } from './todos/todos.component';
 import { CreateTodoFormComponent } from './create-todo-form/create-todo-form.component';
 import { TodosListComponent } from './todos-list/todos-list.component';
 import { FormsModule } from '@angular/forms';
+import { EditTodoFormComponent } from './edit-todo-form/edit-todo-form.component';
+
+import { MatDialogModule } from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
     CreateTodoFormComponent,
-    TodosListComponent
+    TodosListComponent,
+    EditTodoFormComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +28,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MatButtonModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

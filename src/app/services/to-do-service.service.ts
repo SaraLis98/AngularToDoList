@@ -38,7 +38,6 @@ export class ToDoService {
     }
   ];
 
-  //////
   //_onChangeList :Subject<any> = new Subject<any>();
 
   constructor() { }
@@ -60,14 +59,21 @@ export class ToDoService {
   }
 
   public deleteToDo(id: number){
-    this.list = this.list.filter(item => item.id != id);
+    this.list.forEach((value,index) => {
+      if(value.id==id) this.list.splice(index, 1);}
+      );
     //this._onChangeList.next("Soy deleteToDo");
   }
 
-  public updateToDo(toDo: ToDo){
+  public updateStatusToDo(toDo: ToDo){
     let index = this.list.findIndex(i => i.id == toDo.id);
     this.list[index] = toDo;
     //this._onChangeList.next("soy updateToDo");
+  }
+
+  //Metodo para editar el ToDo
+  public editTodo(toDo: ToDo){
+    let index = this.list.indexOf(toDo);
   }
 
   private getNewToDoId(): number{

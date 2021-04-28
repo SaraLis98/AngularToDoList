@@ -1,6 +1,6 @@
-<form class="input-group mb-3 todo-box" (submit)="addToDo()">
-    <input class="form-control me-2 pr-5" type="search" placeholder="Type task here ..." aria-label="Search" [(ngModel)]="toDoInputVal" name="toDoInputVal">
+<form #form="ngForm" class="input-group mb-3 todo-box" (submit)="addToDo(form)">
+    <input required class="form-control me-2 pr-5"   type="search" placeholder="Type task here ..." aria-label="Search" [(ngModel)]="toDoInputVal" name="toDoInputVal">
     <button class=" btn add-button mx-4" type="submit">
-        Add Task
+        <mat-icon>add</mat-icon>
     </button>
 </form>

@@ -15,3 +15,22 @@
     font-size: 22px;
     opacity: 0;
 }
+
+.btn-task-historic{
+    background: #00cca3;
+    box-shadow:  0px 1px 6px grey;
+}
+.btn-task-historic:focus{
+    background: #10a88a;
+}
+
+.btn-status{
+    background: linear-gradient(to right, #e66465, #9198e5);
+}
+
+.btn-edit:hover{
+    background: rgba(211, 207, 207, 0.932);
+}
+.btn-delete:hover{
+    background: rgba(211, 207, 207, 0.932);
+}

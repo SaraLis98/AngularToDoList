@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { EditTodoFormComponent } from '../edit-todo-form/edit-todo-form.component';
 import { ToDo } from '../models/to-do';
 import { ToDoService } from '../services/to-do-service.service';
 
@@ -12,7 +14,7 @@ export class TodosListComponent implements OnInit {
   historicMode: boolean = false;
   _list: ToDo[] = []; //Lista de ToDos vacía
 
-  constructor(private todoService: ToDoService) { }
+  constructor(private todoService: ToDoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this._list = this.todoService.getToDos();
@@ -24,13 +26,23 @@ export class TodosListComponent implements OnInit {
   }
 
   deleteToDo(id: number){
-    if(confirm("Are you sure?")){
+    if(confirm("¿Está seguro?")){
       this.todoService.deleteToDo(id);
     }
   }
 
-  updateToDo(todo: ToDo){
-    this.todoService.updateToDo(todo);
+  updateStatusToDo(todo: ToDo){
+    this.todoService.updateStatusToDo(todo);
+  }
+
+  ///Metodo para editar el ToDo
+  editTodo(todo: ToDo){
+    this.todoService.editTodo(todo);
+    console.log("He pasado por data")
+    let dialogRef = this.dialog.open(EditTodoFormComponent, {
+      width: '700px',
+      data: todo.text
+    });
   }
 
   get list(): ToDo[]{
