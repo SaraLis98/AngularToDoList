@@ -37,11 +37,9 @@ export class TodosListComponent implements OnInit {
 
   ///Metodo para editar el ToDo
   editTodo(todo: ToDo){
-    this.todoService.editTodo(todo);
-    console.log("He pasado por data")
     let dialogRef = this.dialog.open(EditTodoFormComponent, {
       width: '700px',
-      data: todo.text
+      data: {...todo}
     });
   }
 
@@ -53,7 +51,7 @@ export class TodosListComponent implements OnInit {
     }
   }
 
-  changeMode(){
-    this.historicMode = !this.historicMode;
+  changeMode(mode: boolean){
+    this.historicMode = mode;
   }
 }

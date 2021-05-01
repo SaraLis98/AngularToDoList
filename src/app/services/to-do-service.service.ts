@@ -73,7 +73,8 @@ export class ToDoService {
 
   //Metodo para editar el ToDo
   public editTodo(toDo: ToDo){
-    let index = this.list.indexOf(toDo);
+    let index = this.list.findIndex(i => i.id == toDo.id);
+    this.list[index] = {...toDo};
   }
 
   private getNewToDoId(): number{

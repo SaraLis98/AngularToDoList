@@ -1,7 +1,7 @@
 <div class="container mt-5">
     <div class="">
-        <button (click)="changeMode()" class="btn btn-task-historic  mr-1 {{ historicMode ? '' : 'active' }}">Todas las tareas</button>
-        <button (click)="changeMode()" class="btn btn-task-historic  {{ historicMode ? 'active' : '' }}">Histórico</button>
+        <button (click)="changeMode(false)" class="btn btn-task-historic  mr-1 {{ historicMode ? '' : 'active' }}">Todas las tareas</button>
+        <button (click)="changeMode(true)" class="btn btn-task-historic  {{ historicMode ? 'active' : '' }}">Histórico</button>
     </div>
     
     <div class="todo-list">
