@@ -1,10 +1,10 @@
 import { ToDoStatus } from "./to-do-status";
 
 export interface ToDo {
-    id: number; 
+    id?: string; 
     text: string;
     createDate: Date;
-    statusId: number;
+    statusId: string;
 
     status?: ToDoStatus;
 }

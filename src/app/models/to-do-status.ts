@@ -1,4 +1,4 @@
 export interface ToDoStatus {
-    id: number;
+    id?: string;
     name: string;
 }

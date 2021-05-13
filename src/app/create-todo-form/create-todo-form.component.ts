@@ -23,10 +23,3 @@ export class CreateTodoFormComponent implements OnInit {
     this.toDoInputVal = "";
   }
 }
-
-//if (this.toDoInputVal == ""){
-  //alert("¡Tiene que escribir algo!");
-//} else{
-  //this.todoService.addToDo(this.toDoInputVal);
-  //this.toDoInputVal = ""; 
-//}

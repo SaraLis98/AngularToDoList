@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, of } from 'rxjs';
 import { EditTodoFormComponent } from '../edit-todo-form/edit-todo-form.component';
 import { ToDo } from '../models/to-do';
 import { ToDoService } from '../services/to-do-service.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todos-list',
@@ -12,46 +14,51 @@ import { ToDoService } from '../services/to-do-service.service';
 export class TodosListComponent implements OnInit {
 
   historicMode: boolean = false;
-  _list: ToDo[] = []; //Lista de ToDos vacía
-
+  list = this.todoService.getToDos(); //Lista de ToDos vacía
+  listOfTodos: ToDo[] = [];
+  value = 0;
   constructor(private todoService: ToDoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this._list = this.todoService.getToDos();
-    // this.todoService._onChangeList.subscribe(e => {
-    //   console.log(e);
-    //   console.log(this.list);
-    //   this.list = this.todoService.getToDos();
-    // });
+    this.list = this.todoService.getToDos();
+    //this.todoFilter();
   }
 
-  deleteToDo(id: number){
-    if(confirm("¿Está seguro?")){
-      this.todoService.deleteToDo(id);
+  deleteToDo(id: string){
+     if(confirm("¿Está seguro?")){
+      this.todoService.deleteToDo(id!);
     }
   }
 
-  updateStatusToDo(todo: ToDo){
-    this.todoService.updateStatusToDo(todo);
+  updateStatusToDo(todo: ToDo, statusId: string){
+    todo.statusId = statusId;
+    this.todoService.editTodo(todo);
   }
 
-  ///Metodo para editar el ToDo
   editTodo(todo: ToDo){
     let dialogRef = this.dialog.open(EditTodoFormComponent, {
       width: '700px',
       data: {...todo}
     });
   }
-
-  get list(): ToDo[]{
-    if(this.historicMode){
-      return this._list.filter(i => i.statusId === 3);
-    } else{
-      return this._list.filter(i => i.statusId != 3);
-    }
-  }
-
+  
+  // todoFilter() {
+  //   this.list.subscribe(i => {
+  //     this.listOfTodos = i as ToDo[]
+  //   });
+  //   if(this.historicMode){
+  //      return (this.listOfTodos.filter(i => i.statusId == "3"));
+  //   } else{
+  //     return (this.listOfTodos.filter(i => i.statusId != "3"));
+  //   }
+  // }
   changeMode(mode: boolean){
     this.historicMode = mode;
+    //this.todoFilter();
   }
+
+  sorting(value: any){
+    this.value = value.target.value;
+  }
+
 }

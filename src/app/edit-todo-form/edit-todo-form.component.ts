@@ -16,7 +16,6 @@ export class EditTodoFormComponent implements OnInit {
     private todoService: ToDoService) { }
 
   ngOnInit(): void {
-    console.log(this.todo);
   }
   //Metodo boton cancelar en el edit dialog
   cancel(){

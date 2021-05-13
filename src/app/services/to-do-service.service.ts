@@ -1,90 +1,66 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Observable, Subject } from 'rxjs';
 import { ToDo } from '../models/to-do';
 import { ToDoStatus } from '../models/to-do-status';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class ToDoService {
+  public toDos: Observable<ToDo[]>;
+  public toDosStatus: Observable<ToDoStatus[]>;
+  public toDoCollections: AngularFirestoreCollection<ToDo>;
+  public toDoStatusCollections: AngularFirestoreCollection<ToDoStatus>;
 
-  status: ToDoStatus[] = [
-    {
-      id: 1,
-      name: "Pendiente"
-    },
-    {
-      id: 2,
-      name: "En proceso"
-    },
-    {
-      id: 3,
-      name: "Resuelto"
-    }
-  ];
-
-  list: ToDo[] = [
-    {
-      id: 1,
-      text: "Hola amigo",
-      createDate: new Date(),
-      statusId: 1,
-    },
-    {
-      id: 2,
-      text: "Adiós amigo",
-      createDate: new Date(),
-      statusId: 3
-    }
-  ];
+  constructor(private firestore: AngularFirestore) { 
+    this.toDoCollections = this.firestore.collection<ToDo>('ToDo');
+    this.toDos = this.toDoCollections.snapshotChanges().pipe(
+      map(action => {
+        return action.map(res => {
+          const data = res.payload.doc.data();
+          const id = res.payload.doc.id;
+          return {id, ...data};
+        });
+      }) 
+    )
+    this.toDoStatusCollections = this.firestore.collection<ToDoStatus>('ToDoStatus');
+    this.toDosStatus = this.toDoStatusCollections.snapshotChanges().pipe(
+      map(action => {
+        return action.map(res => {
+          const data = res.payload.doc.data();
+          const id = res.payload.doc.id;
+          return {id, ...data};
+        });
+      }) 
+    )
+  }
 
   //_onChangeList :Subject<any> = new Subject<any>();
 
-  constructor() { }
-
-  public getToDos(): ToDo[]{
-    return this.list;
+  getToDos(): Observable<ToDo[]> {
+    return this.toDos;
+    //return this.firestore.collection('ToDo').snapshotChanges();
   }
-
-  public addToDo(toDoText: string){
-    let newToDo: ToDo = {
-      id: this.getNewToDoId(),
+  
+  addToDo(toDoText: string) {
+    let data: ToDo = {
       text: toDoText,
       createDate: new Date(),
-      statusId: 1
-    };
-
-    this.list.push(newToDo);
-    //this._onChangeList.next("Soy addToDo");
+      statusId: "1"
+    }
+    return this.firestore.collection('ToDo').add(data);
   }
 
-  public deleteToDo(id: number){
-    this.list.forEach((value,index) => {
-      if(value.id==id) this.list.splice(index, 1);}
-      );
-    //this._onChangeList.next("Soy deleteToDo");
+  public async deleteToDo(id: string){
+    const del =  await this.firestore.collection('ToDo').doc(id).delete();
+    return del;
   }
 
-  public updateStatusToDo(toDo: ToDo){
-    let index = this.list.findIndex(i => i.id == toDo.id);
-    this.list[index] = toDo;
-    //this._onChangeList.next("soy updateToDo");
-  }
-
-  //Metodo para editar el ToDo
-  public editTodo(toDo: ToDo){
-    let index = this.list.findIndex(i => i.id == toDo.id);
-    this.list[index] = {...toDo};
-  }
-
-  private getNewToDoId(): number{
-    let biggestId: number = 1;
-    this.list.forEach(item => {
-      if(item.id > biggestId){
-        biggestId = item.id;
-      }
-    })
-    return biggestId + 1;
+  public async editTodo(toDo: ToDo){ 
+    return await this.firestore.collection('ToDo').doc(toDo.id).update(toDo);
   }
 
 }

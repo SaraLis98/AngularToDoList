@@ -5,22 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+// Modulos
 import { MatButtonModule} from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule} from '@angular/material/icon';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { FormsModule } from '@angular/forms';
+
+// Componentes
 import { TodosComponent } from './todos/todos.component';
 import { CreateTodoFormComponent } from './create-todo-form/create-todo-form.component';
 import { TodosListComponent } from './todos-list/todos-list.component';
-import { FormsModule } from '@angular/forms';
 import { EditTodoFormComponent } from './edit-todo-form/edit-todo-form.component';
 
-import { MatDialogModule } from '@angular/material/dialog';
+import { PipePipe } from './services/pipe.pipe';
+import { environment } from 'src/environments/environment';
+
 @NgModule({
   declarations: [
     AppComponent,
     TodosComponent,
     CreateTodoFormComponent,
     TodosListComponent,
-    EditTodoFormComponent
+    EditTodoFormComponent,
+    PipePipe
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     MatIconModule,
     FormsModule,
-    MatDialogModule
+    MatDialogModule,
+    AngularFirestoreModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
