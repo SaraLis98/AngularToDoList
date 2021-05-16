@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { EditTodoFormComponent } from '../edit-todo-form/edit-todo-form.component';
 import { ToDo } from '../models/to-do';
 import { ToDoService } from '../services/to-do-service.service';
-import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-todos-list',
@@ -14,17 +13,19 @@ import { filter, map } from 'rxjs/operators';
 export class TodosListComponent implements OnInit {
 
   historicMode: boolean = false;
-  list = this.todoService.getToDos(); //Lista de ToDos vacía
-  listOfTodos: ToDo[] = [];
+  list: ToDo[] = [];
   value = 0;
+
   constructor(private todoService: ToDoService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
-    this.list = this.todoService.getToDos();
-    //this.todoFilter();
+    // Subscribe se queda escuchando el observable y por cada dato que aparece actualiza this.list
+    this.todoService.getToDos().subscribe(data => {
+      this.list = data;
+    });
   }
 
-  deleteToDo(id: string){
+  deleteToDo(id: string | undefined){
      if(confirm("¿Está seguro?")){
       this.todoService.deleteToDo(id!);
     }
