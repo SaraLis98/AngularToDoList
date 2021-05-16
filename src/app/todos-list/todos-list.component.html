@@ -17,7 +17,9 @@
     </div>
     
     <div class="todo-list">
-        <div class="todo-item d-flex justify-content-between py-4" *ngFor="let item of (list | async | pipeSort: value)">
+        <ng-container *ngFor="let item of (list | async | pipeSort: value)">
+                
+            <div class="todo-item d-flex justify-content-between py-4" *ngIf="(!historicMode && item.statusId != '3') || (historicMode && item.statusId == '3')">
                 <div class="todo-text mt-1 ml-3">
                     {{ item.text }}
                 </div>
@@ -36,6 +38,7 @@
                     <button class="btn btn-sm btn-edit mr-3" (click)="editTodo(item)"><mat-icon>edit</mat-icon></button>
                     <button class="btn btn-sm btn-delete" (click)="deleteToDo(item.id)"><mat-icon>delete</mat-icon></button>
                 </div>
-        </div>
+            </div>
+        </ng-container>
     </div>
 </div>

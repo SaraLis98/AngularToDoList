@@ -41,20 +41,9 @@ export class TodosListComponent implements OnInit {
       data: {...todo}
     });
   }
-  
-  // todoFilter() {
-  //   this.list.subscribe(i => {
-  //     this.listOfTodos = i as ToDo[]
-  //   });
-  //   if(this.historicMode){
-  //      return (this.listOfTodos.filter(i => i.statusId == "3"));
-  //   } else{
-  //     return (this.listOfTodos.filter(i => i.statusId != "3"));
-  //   }
-  // }
+
   changeMode(mode: boolean){
     this.historicMode = mode;
-    //this.todoFilter();
   }
 
   sorting(value: any){
