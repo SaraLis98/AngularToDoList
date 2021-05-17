@@ -10,8 +10,8 @@ export class PipePipe implements PipeTransform {
     toDoArray = toDoArray || [];
     return toDoArray.sort((todo1, todo2) => {
       if ( argument == 1 ){
-        if (todo1.text > todo2.text) return 1;
-        if (todo1.text < todo2.text) return -1;
+        if (todo1.text.toLowerCase() > todo2.text.toLowerCase()) return 1;
+        if (todo1.text.toLowerCase() < todo2.text.toLowerCase()) return -1;
         else return 0;
       } else if ( argument == 2){
         let timea = String(todo1.createDate)
