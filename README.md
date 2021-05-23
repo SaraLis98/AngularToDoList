@@ -19,19 +19,23 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   <li>Diálogo para editar la tarea</li>
   <li>Lista de las tareas</li>
 </ul>
-### Servicio
+
+### Componentes
 <ul>
   <li>Para la conexion con la base de datos</li>
 </ul>
+
 ### Modelo
 <ul>
   <li>Para la tarea</li>
   <li>Para el estado de la tarea</li>
 </ul>
+
 ### Pipe
 <ul>
   <li>Para filtrar por nombre, fecha y estado</li>
 </ul>
+
 ## Angular Material
 <ul>
   <li>MatButton</li>
