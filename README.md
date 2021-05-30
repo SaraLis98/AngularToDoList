@@ -20,7 +20,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
   <li>Lista de las tareas</li>
 </ul>
 
-### Componentes
+### Servicio
 <ul>
   <li>Para la conexion con la base de datos</li>
 </ul>
